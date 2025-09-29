@@ -19,6 +19,9 @@ abstract class ImageAssets {
   static const String onBoarding3 = "$base/onboarding3.png";
   static const String onBoarding4 = "$base/onboarding4.png";
   static const String onBoarding5 = "$base/onboarding5.png";
+  static const String sebhaBackground = "$base/sebha_background.png";
+  static const String sebhaBody = "$base/sebha_body.png";
+  static const String sebhaHead = "$base/sebha_head.png";
 }
 
 abstract class IconAssets {
