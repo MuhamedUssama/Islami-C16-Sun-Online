@@ -3,11 +3,15 @@ import 'package:islami_app_online_sun/models/sura_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefsManager {
-  static Future<void> saveSuraIndexs(String suraIndex) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  static late SharedPreferences _prefs;
 
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future<void> saveSuraIndexs(String suraIndex) async {
     List<String> mostRecentSuraIndexs =
-        prefs.getStringList(StringsManager.surasPrefsKey) ?? [];
+        _prefs.getStringList(StringsManager.surasPrefsKey) ?? [];
 
     if (mostRecentSuraIndexs.length >= 5) {
       mostRecentSuraIndexs.remove(mostRecentSuraIndexs.first);
@@ -19,16 +23,15 @@ class PrefsManager {
 
     mostRecentSuraIndexs.add(suraIndex);
 
-    await prefs.setStringList(
+    await _prefs.setStringList(
       StringsManager.surasPrefsKey,
       mostRecentSuraIndexs,
     );
   }
 
   static Future<List<SuraModel>> getMostRecentSuras() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> mostRecentSuraIndexs =
-        prefs.getStringList(StringsManager.surasPrefsKey) ?? [];
+        _prefs.getStringList(StringsManager.surasPrefsKey) ?? [];
 
     List<SuraModel> mostRecentSuras = [];
 
@@ -39,5 +42,13 @@ class PrefsManager {
     }
 
     return mostRecentSuras.reversed.toList();
+  }
+
+  static Future<void> setOnboardingSeen() async {
+    await _prefs.setBool(StringsManager.onboardingSeenKey, true);
+  }
+
+  static bool getOnboardingSeen() {
+    return _prefs.getBool(StringsManager.onboardingSeenKey) ?? false;
   }
 }

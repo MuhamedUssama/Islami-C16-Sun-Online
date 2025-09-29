@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:islami_app_online_sun/features/main_layout/main_layout.dart';
+import 'package:islami_app_online_sun/features/onboarding/screens/onborading_screen.dart';
 import 'package:islami_app_online_sun/features/splash/splash.dart';
 import 'package:islami_app_online_sun/features/sura_details/sura_details.dart';
 
@@ -10,8 +11,8 @@ class RoutesManager {
   static const String suraDetails = "/suraDetails";
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => Splash(),
-    mainLayout : (context)=> MainLayout(),
-    suraDetails : (context)=> SuraDetails(),
+    mainLayout: (context) => MainLayout(),
+    suraDetails: (context) => SuraDetails(),
+    onBoarding: (context) => OnboradingScreen(),
   };
-
 }
