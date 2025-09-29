@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app_online_sun/config/theme/theme_manager.dart';
+import 'package:islami_app_online_sun/core/cache/prefs_manager.dart';
 import 'package:islami_app_online_sun/core/routes_manager/routes_manager.dart';
 
-void main(){
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await PrefsManager.init();
   runApp(const IslamiApp());
 }
 
@@ -14,7 +18,7 @@ class IslamiApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: RoutesManager.routes,
-      initialRoute: RoutesManager.splash ,
+      initialRoute: RoutesManager.splash,
       theme: ThemeManager.light,
       darkTheme: ThemeManager.dark,
       themeMode: ThemeMode.light,
